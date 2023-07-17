@@ -1,0 +1,33 @@
+//utilizar yargs
+const argv = require("yargs")
+  .option("b", {
+    alias: "a",
+    type: "number",
+    demandOption: true, //obligatorio ingresar dato
+    describe:'Es la base de la tabla de multiplicar'
+  })
+  .check((argv, options) => {
+    //validacion de comando
+    if (isNaN(argv.b)) {
+      throw 'la base "a" debe ser un numero';
+    }
+    return true;
+    console.log("yargs", argv);
+  })
+  .option("l", {
+    //para listar la tabla
+    alias: "listar",
+    type: "boolean",
+    demandOption: true, //obligatorio ingresar dato
+    default: false,
+    describe:'Es para listar la tabla de multiplicar'
+  }).option("h", {
+    //para poner limite a la tabla
+    alias: "limite",
+    type: "number",
+    demandOption: true, //obligatorio ingresar dato
+    default: 10,
+    describe:'Es para poner limite a la tabla'
+  }).argv;
+
+module.exports = argv;
